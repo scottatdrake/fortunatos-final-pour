@@ -1,80 +1,70 @@
-function updateCountdown() {
+// Constants and utility functions
+const ONE_DAY = 1000 * 60 * 60 * 24;
+const ONE_HOUR = 1000 * 60 * 60;
+const ONE_MINUTE = 1000 * 60;
+
+const updateCountdown = () => {
   const eventDate = new Date("October 28, 2023 19:30:00").getTime();
   const now = new Date().getTime();
   const distance = eventDate - now;
-
-  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-  document.getElementById("timer").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+  const days = Math.floor(distance / ONE_DAY);
+  const hours = Math.floor((distance % ONE_DAY) / ONE_HOUR);
+  const minutes = Math.floor((distance % ONE_HOUR) / ONE_MINUTE);
+  const seconds = Math.floor((distance % ONE_MINUTE) / 1000);
+  document.getElementById("timer").textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
 
   if (distance < 0) {
     clearInterval(countdownInterval);
-    document.getElementById("timer").innerHTML = "EXPIRED";
+    document.getElementById("timer").textContent = "EXPIRED";
   }
-}
+};
 
+// Countdown timer
 const countdownInterval = setInterval(updateCountdown, 1000);
 
-// Get modal element
+// Modal functionality
 const modal = document.getElementById("rsvp-modal");
-// Get close button
 const closeBtn = document.getElementsByClassName("close")[0];
-// Get RSVP link
 const rsvpLink = document.getElementById("rsvp-link");
 
-// Open the modal
-rsvpLink.addEventListener("click", function(event) {
+rsvpLink.addEventListener("click", (event) => {
   event.preventDefault();
   modal.style.display = "block";
 });
 
-// Close the modal
-closeBtn.addEventListener("click", function() {
+closeBtn.addEventListener("click", () => {
   modal.style.display = "none";
 });
 
-// Close the modal if outside click
-window.addEventListener("click", function(event) {
+window.addEventListener("click", (event) => {
   if (event.target === modal) {
     modal.style.display = "none";
   }
 });
 
-
-// Fade in on page load
-document.addEventListener("DOMContentLoaded", function() {
+// Page load and scroll effects
+document.addEventListener("DOMContentLoaded", () => {
   const image = document.querySelector('.portrait-image');
   image.classList.add('visible');
-});
 
-// Fade in on scroll
-window.addEventListener('scroll', function() {
-  const elementsToFade = document.querySelectorAll('.main > *'); // Selects all block-level children elements of .main
-
-  elementsToFade.forEach(function(element) {
-    const position = element.getBoundingClientRect();
-
-    if (position.top <= window.innerHeight && position.bottom >= 0) {
-      if (!element.classList.contains('visible')) {
-        element.classList.add('visible');
-      }
-    }
-  });
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-  var signatureElement = document.querySelector('.signature');
-
-  function checkSignatureVisibility() {
-    var rect = signatureElement.getBoundingClientRect();
+  const signatureElement = document.querySelector('.signature');
+  const checkSignatureVisibility = () => {
+    const rect = signatureElement.getBoundingClientRect();
     if (rect.top < window.innerHeight && rect.bottom > 0) {
       signatureElement.classList.add('animate');
     }
-  }
+  };
 
   window.addEventListener('scroll', checkSignatureVisibility);
-  checkSignatureVisibility(); // for initial load
+  checkSignatureVisibility();
+});
+
+window.addEventListener('scroll', () => {
+  const elementsToFade = document.querySelectorAll('.main > *');
+  elementsToFade.forEach((element) => {
+    const position = element.getBoundingClientRect();
+    if (position.top <= window.innerHeight && position.bottom >= 0) {
+      element.classList.add('visible');
+    }
+  });
 });
