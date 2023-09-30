@@ -27,13 +27,14 @@ body {
 .container {
   max-width: 650px;
   margin: auto;
-  padding: 20px;
+  padding: 25px;
   text-align: center;
 }
 
 .portrait-image {
     max-width: 100%;
-height: auto;
+  height: auto;
+  opacity: 0;
 }
 
 .main {
@@ -42,7 +43,7 @@ height: auto;
 
 #countdown {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 25px;
     /* font-size: 1.5em; */
 }
 
@@ -127,4 +128,41 @@ text-decoration: underline; /* Adds underline on hover */
   @keyframes glow-flicker {
     0% { text-shadow: 0 0 5px #FFD700, 0 0 10px #FFD700; }
     100% { text-shadow: 0 0 6px #FFA500, 0 0 12px #FFA500; }
+  }
+
+  @keyframes writeSignature {
+    from {
+      clip-path: inset(0 100% 0 0);
+    }
+    to {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+
+  .signature {
+    font-family: 'Dancing Script', cursive;
+    font-size: 48px;
+    display: inline-block;
+    transform: rotate(-7deg);
+    border-bottom: 2px solid #000;
+    margin-top: 20px;
+    clip-path: inset(0 100% 0 0); /* start off-screen */
+  }
+
+  .signature.animate {
+    animation: writeSignature 3s forwards ease-in-out; /* 3s is the duration */
+  }
+
+
+  .fade-in {
+    opacity: 1;
+    transition: opacity 1s ease-in-out;
+  }
+
+  .main > * {
+    opacity: 0;
+  }
+  .visible {
+    opacity: 1;
+    transition: opacity 1s ease-in-out;
   }

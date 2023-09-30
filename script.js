@@ -42,3 +42,39 @@ window.addEventListener("click", function(event) {
     modal.style.display = "none";
   }
 });
+
+
+// Fade in on page load
+document.addEventListener("DOMContentLoaded", function() {
+  const image = document.querySelector('.portrait-image');
+  image.classList.add('visible');
+});
+
+// Fade in on scroll
+window.addEventListener('scroll', function() {
+  const elementsToFade = document.querySelectorAll('.main > *'); // Selects all block-level children elements of .main
+
+  elementsToFade.forEach(function(element) {
+    const position = element.getBoundingClientRect();
+
+    if (position.top <= window.innerHeight && position.bottom >= 0) {
+      if (!element.classList.contains('visible')) {
+        element.classList.add('visible');
+      }
+    }
+  });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  var signatureElement = document.querySelector('.signature');
+
+  function checkSignatureVisibility() {
+    var rect = signatureElement.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      signatureElement.classList.add('animate');
+    }
+  }
+
+  window.addEventListener('scroll', checkSignatureVisibility);
+  checkSignatureVisibility(); // for initial load
+});
