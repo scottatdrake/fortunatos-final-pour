@@ -2,7 +2,7 @@
 
 ## Overview
 
-This repository contains the code for a one-page website designed to invite friends to a unique cellared beer sampling party themed around Edgar Allan Poe's "The Cask of Amontillado."
+This repository contains the code for a one-page website, [fortunatosfinalpour.com](https://fortunatosfinalpour.com), designed to invite a group of friends to a unique cellared beer tasting party themed around Edgar Allan Poe's "The Cask of Amontillado."
 
 ## License
 
